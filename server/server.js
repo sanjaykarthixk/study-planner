@@ -10,7 +10,11 @@ const app = express();
 
 // CORS — must be before everything else
 app.use((req, res, next) => {
-  const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174'];
+  const allowedOrigins = [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'https://study-planner-flax-rho.vercel.app',
+  ];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
@@ -38,5 +42,5 @@ app.get('/', (req, res) => res.json({ message: 'StudyPlanner API running' }));
 
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
