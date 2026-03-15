@@ -1,3 +1,4 @@
+// StudyOS API v1.1
 const express = require('express');
 const dotenv = require('dotenv');
 const cron = require('node-cron');
