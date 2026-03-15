@@ -4,7 +4,6 @@ const api = axios.create({
   baseURL: 'https://study-planner-api-0vf4.onrender.com/api',
 });
 
-
 // Attach token to every request
 api.interceptors.request.use((config) => {
   const user = JSON.parse(localStorage.getItem('user') || 'null');
@@ -15,9 +14,12 @@ api.interceptors.request.use((config) => {
 });
 
 // Auth
-export const registerUser = (data) => api.post('/auth/register', data);
-export const loginUser    = (data) => api.post('/auth/login',    data);
-export const getMe        = ()     => api.get('/auth/me');
+export const registerUser   = (data) => api.post('/auth/register',        data);
+export const verifyOTP      = (data) => api.post('/auth/verify-otp',      data);
+export const loginUser      = (data) => api.post('/auth/login',            data);
+export const forgotPassword = (data) => api.post('/auth/forgot-password',  data);
+export const resetPassword  = (data) => api.post('/auth/reset-password',   data);
+export const getMe          = ()     => api.get('/auth/me');
 
 // Subjects
 export const getSubjects    = ()           => api.get('/subjects');
