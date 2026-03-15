@@ -1,5 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cron = require('node-cron');
+const https = require('https');
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/errorHandler');
 
@@ -44,3 +46,12 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// Keep Render awake — ping every 14 minutes
+cron.schedule('*/14 * * * *', () => {
+  https.get('https://study-planner-api-0vf4.onrender.com/', (res) => {
+    console.log('Keep alive ping sent');
+  }).on('error', (err) => {
+    console.error('Keep alive error:', err.message);
+  });
+});
